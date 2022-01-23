@@ -9,3 +9,15 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.0
 dotnet tool install -g dotnet-aspnet-codegenerator --version 3.1.5
 ***dotnet add package Microsoft.EntityFrameworkCore.SQLServer --version 3.1.0
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+
+To manipulate a DB on SQL Server:
+ - Change Startup.cs file, at ConfigureServices method write:
+    services.AddDbContext<TodoContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("TodoContext")));
+ - Change appsettings.json file, add the follow code:
+    "ConnectionStrings": {
+        "TodoContext": "Server=localhost\\SQLEXPRESS;Database=master1;Trusted_Connection=True;"
+    },
+ - Commands are:
+    dotnet ef migrations add InitialCreate
+    dotnet ef database update
