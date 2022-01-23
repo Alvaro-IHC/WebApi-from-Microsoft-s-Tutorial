@@ -1,0 +1,11 @@
+https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+dotnet new webapi -o TodoApi
+cd TodoApi
+dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 3.1.0
+code -r ../TodoApi
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.1.0
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.0
+dotnet tool install -g dotnet-aspnet-codegenerator --version 3.1.5
+***dotnet add package Microsoft.EntityFrameworkCore.SQLServer --version 3.1.0
+dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
